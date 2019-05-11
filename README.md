@@ -1,114 +1,70 @@
 ![Example-Logo](https://i.imgur.com/IPrlf78.png)
-# Sparks Masternode Setup Guide (Ubuntu 16.04)
-This guide will assist you in setting up a Sparks Masternode on a Linux Server running Ubuntu 16.04. (Use at your own risk)
+# SparksPay Guardian node Setup Guide (Ubuntu 16.04 and 18.04 - 64 bit)
+This guide will assist you in setting up a SparksPay Masternode on a Linux Server running Ubuntu 16.04 or 16.04. (Use at your own risk)
 
-If you require further assistance contact the support team @ [Discord](https://discord.gg/WacZZWb)
+If you don't know what flavor (32 bit or 64 bit) of Linux you have, type `uname -m` in console. It shows if your system is running 32-bit (i686 or i386) or 64-bit(x86_64). For this install script to work, x86_64 is required.
+
+If you require further assistance contact the support team @ [Discord](https://discord.gg/6ktdN8Z)
 ***
 ## Requirements
-1) **1,000 Sparks coins.**
-2) **A Vultr VPS running Linux Ubuntu 16.04.**
-3) **A Windows local wallet.**
-4) **An SSH client such as [Bitvise](https://dl.bitvise.com/BvSshClient-Inst.exe)**
+1) **25,000 Sparks coins.**
+2) **Any VPS running Linux Ubuntu 16.04 or 18.04**
+3) **A Windows/MAC Sparks wallet.**
+4) **An SSH client such as kitty or putty**
 ***
 ## Contents
-* **Section A**: Creating the VPS within [Vultr](https://www.vultr.com/?ref=7296974).
-* **Section B**: Downloading and installing Bitvise.
-* **Section C**: Connecting to the VPS and installing the MN script via Bitvise.
-* **Section D**: Preparing the local wallet.
-* **Section E**: Connecting & Starting the masternode.
+* **Section A**: Downloading and Running Auto Installer script  
+* **Section B**: Preparing the local wallet.
+* **Section C**: Connecting & Starting the masternode.
 ***
 
-## Section A: Creating the VPS within [Vultr](https://www.vultr.com/?ref=7296974) 
+* Make sure your Linux has Git installer. Execute the following on your VPS
+* `git --version`
+* If the reply is a version number, you can continue.
+* If not, use [this guide](https://www.digitalocean.com/community/tutorials/how-to-install-git-on-ubuntu-14-04) to install Git.
+
+## The short version  
+* Install the Sparks wallet on your Mac or Windows PC
+* Send exactly 25000 SPK to your self (generate a new address for each new guaridan node)
+* Wait for at least 15 confirmations, then type this in the wallet console.
+* `guardian outputs`and
+* `guardian genkey` (private key)
+
+* Log onto your VPS and execute the following
+* `git clone https://github.com/sparkspay/SparksMasternodeInstall`
+* `cd SparksMasternodeInstall`
+* Make sure you have the latest version of the script
+* `git pull`
+* `./sparks_AutoInstaller.sh`
+* Follow the on-screen instructions
+
+* If you are not sure of anything press Ctrl+c to exit
+* wait for the tests to loop
+* press start in HOT wallet when instructed
+* reboot VPS
+
+***
+
+## Section A: Downloading and running Auto Installer script
+
 ***Step 1***
-* Register at [Vultr](https://www.vultr.com/?ref=7296974)
+* Connect to your VPS
+* log in as root or any other user
+
+
 ***
 
 ***Step 2***
-* After you have added funds to your account go [here](https://my.vultr.com/deploy/) to create your Server
+* Paste the code below into terminal then press enter
+* `git clone https://github.com/sparkspay/SparksMasternodeInstall`
+* `cd SparksMasternodeInstall`
+* `git pull`
 ***
-
-***Step 3*** 
-* Choose a server location (preferably somewhere close to you)
-![Example-Location](https://i.imgur.com/ozi7Bkr.png)
-***
-
-***Step 4***
-* Choose a server type: Ubuntu 16.04
-![Example-OS](https://i.imgur.com/aSMqHUK.png)
-***
-
-***Step 5***
-* Choose a server size: $5/mo will be fine 
-![Example-OS](https://i.imgur.com/UoGoHcM.png)
-***
-
-***Step 6*** 
-* Set a Server Hostname & Label (name it whatever you want)
-![Example-hostname](https://i.imgur.com/NtualgA.png)
-***
-
-***Step 7***
-* Click "Deploy now"
-
-![Example-Deploy](https://i.imgur.com/4qpYuH0.png)
-***
-
-
-## Section B: Downloading and installing BitVise. 
-
-***Step 1***
-* Download Bitvise [here](https://dl.bitvise.com/BvSshClient-Inst.exe)
-***
-
-***Step 2***
-* Select the correct installer depending upon your operating system. Then follow the install instructions. 
-
-![Example-PuttyInstaller](https://i.imgur.com/yF3694G.png)
-***
-
-
-## Section C: Connecting to the VPS & Installing the MN script via Bitvise.
-
-***Step 1***
-* Copy your VPS IP (you can find this by going to the server tab within Vultr and clicking on your server. 
-![Example-Vultr](https://i.imgur.com/z41MiwY.png)
-***
-
-***Step 2***
-* Open the bitvise application and fill in the "Hostname" box with the IP of your VPS.
-![Example-PuttyInstaller](https://i.imgur.com/vkN1alC.png)
-***
-
 ***Step 3***
-* Copy the root password from the VULTR server page.
-![Example-RootPass](https://i.imgur.com/JnXQXav.png)
-***
 
-***Step 4***
-* Type "root" as the login/username.
-![Example-Root](https://i.imgur.com/11GMkvA.png)
-***
+* Run the Auto Installer with the following command
 
-***Step 5*** 
-* Paste the password into the Bitvise terminal by right clicking (it will not show the password so just press enter)
-![Example-RootPassEnter](https://i.imgur.com/zVhOAKu.png)
-***
-
-***Step 6*** 
-* Once you have clicked open it will open a security alert (click yes).  
-***
-
-***Step 7***
-* Paste the code below into the Bitvise terminal then press enter (it will just go to a new line)
-![Example-RootPassEnter](https://i.imgur.com/K6xlnav.png)
-
-`wget -q https://raw.githubusercontent.com/Realbityoda/Sparks/master/sparks_install.sh`
-***
-
-***Step 8***
-* Paste the code below into the Bitvise terminal then press enter
-
-`bash sparks_install.sh`
+`./sparks_AutoInstaller.sh`
 
 ![Example-Bash](https://i.imgur.com/5DAJNbd.png)
 
@@ -119,7 +75,7 @@ If you require further assistance contact the support team @ [Discord](https://d
 ***
 
 ***Step 10***
-* When prompted to enter your private key - press enter
+* When prompted to enter your private key (guardian genkey) - press enter
 
 ![Example-installing](https://i.imgur.com/UTjCtrL.png)
 ***
@@ -133,27 +89,27 @@ If you require further assistance contact the support team @ [Discord](https://d
 ## Section D: Preparing the Local wallet
 
 ***Step 1***
-* Download and install the Sparks wallet [here](https://github.com/SparksReborn/sparkspay/releases)
+* Download and install the Sparks wallet [here](https://github.com/sparkspay/sparks/releases)
 ***
 
 ***Step 2***
-* Send EXACLY 1,000 SPK to a receive address within your wallet.
+* Send EXACLY 25,000 SPK to a receive address within your wallet.
 ***
 
 ***Step 3***
-* Create a text document to temporarily store information that you will need. 
+* Create a text document to temporarily store information that you will need.
 ***
 
 ***step 4***
-* Go to the console within the wallet 
+* Go to the console within the wallet
 
 ![Example-console](https://i.imgur.com/rumxdpO.png)
 ***
 
 ***Step 5***
-* Type the command below and press enter 
+* Type the command below and press enter
 
-`masternode outputs` 
+`guardian outputs`
 
 ![Example-outputs](https://i.imgur.com/LNBjk1Q.png)
 ***
@@ -163,19 +119,19 @@ If you require further assistance contact the support team @ [Discord](https://d
 * Paste these into the text document you created earlier as you will need them in the next step.
 ***
 
-# Section E: Connecting & Starting the masternode 
+# Section E: Connecting & Starting the masternode
 
 ***Step 1***
-* Go to the tools tab within the wallet and click open "masternode configuration file" 
+* Go to the tools tab within the wallet and click open "masternode configuration file"
 ![Example-create](https://i.imgur.com/2vozmrA.png)
 ***
 
 ***Step 2***
 
-* Fill in the form. 
+* Fill in the form.
 * For `Alias` type something like "MN01" **don't use spaces**
 * The `Address` is the IP and port of your server (this will be in the Bitvise terminal that you still have open).
-* The `PrivKey` is your masternode Gen key (This is also in the Bitvise terminal that you have open).
+* The `PrivKey` is your guardian genkey (This is also in the Bitvise terminal that you have open).
 * The `TxHash` is the transaction ID/long key that you copied to the text file.
 * The `Output Index` is the 0 or 1 that you copied to your text file.
 ![Example-create](https://i.imgur.com/CP7TjlL.png)
@@ -192,8 +148,8 @@ Click "File Save"
 ***step 4***
 * Check the status of your masternode within the VPS by using the command below:
 
-`sparks-cli masternode status`
+`sparks-cli guardian status`
 
 *You should see ***status 9***
 
-If you do, congratulations! You have now setup a masternode. If you do not, please contact support and they will assist you.  
+If you do, congratulations! You have now setup a masternode. If you do not, please contact support and they will assist you. 
